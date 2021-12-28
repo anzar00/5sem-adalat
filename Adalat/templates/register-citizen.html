@@ -18,22 +18,27 @@
                     <div class="register">
                         <h1>Register</h1>
                         <div class="links">
-                            <a href="{{ url_for('register_page') }}" class="active">Register</a>
-                            <a href="{{ url_for('register_citizen_page') }}">Citizen</a>
+                            <a href="{{ url_for('register_page') }}">Register</a>
+                            <a href="{{ url_for('register_citizen_page') }}" class="active">Citizen</a>
                         </div>
-                        <form action="{{ url_for('register') }}" method="post" autocomplete="off">
+                        <form action="{{ url_for('register_citizen') }}" method="post" autocomplete="off">
                             <label for="username">
                                 <i class="fas fa-user"></i>
                             </label>
-                            <input type="text" name="username" placeholder="Username" id="username" required>
-                            <label for="password">
-                                <i class="fas fa-lock"></i>
-                            </label>
-                            <input type="password" name="password" placeholder="Password" id="password" required>
+                            <input type="text" name="name" placeholder="Name" id="name" required>
                             <label for="email">
                                 <i class="fas fa-envelope"></i>
                             </label>
                             <input type="email" name="email" placeholder="Email" id="email" required>
+                            <label for="contact">
+                                <i class="fas fa-phone"></i>
+                            </label>
+                            <input type="text" name="contact" placeholder="Contact" id="contact" required>
+                            <label for="address">
+                                <i class="fas fa-home"></i>
+                            </label>
+                            <input type="text" name="address" placeholder="Address" id="address" required>
+                            
                             <div class="msg">{{ msg }}</div>
                             <input type="submit" value="Register">
                         </form>
