@@ -16,6 +16,8 @@ mysql = MySQL(app)
 @app.route("/")
 @app.route("/home")
 def home_page():
+    if 'loggedin' in session:
+        return render_template('./admin/index.html', username=session['username'])
     return render_template('home.html')
 @app.route("/home", methods=['GET', 'POST'])
 def login():
@@ -36,7 +38,7 @@ def login():
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            return 'Logged in successfully!'
+            return render_template('./admin/index.html', username=session['username'])
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -87,3 +89,6 @@ def register():
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
     return render_template('register.html', msg=msg)
+
+
+    
