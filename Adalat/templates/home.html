@@ -2,6 +2,7 @@
 
 {% block head %} 
     <title>Home | Adalat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}"/>
 {% endblock %}
     
     {% block body %} 
@@ -12,11 +13,26 @@
                     <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="./static/assets/img/intro1.jpg" alt="..." />
                     <div class="intro-text left-0 text-center bg-faded p-5 rounded">
                         <h2 class="section-heading mb-4">
-                            <span class="section-heading-upper">Fresh Coffee</span>
-                            <span class="section-heading-lower">Worth Drinking</span>
+                            <span class="section-heading-lower">Welcome Back</span>
                         </h2>
-                        <p class="mb-3">Every cup of our quality artisan coffee starts with locally sourced, hand picked ingredients. Once you try it, our coffee will be a blissful addition to your everyday morning routine - we guarantee it!</p>
-                        <div class="intro-button mx-auto"><a class="btn btn-primary btn-xl" href="#!">Visit Us Today!</a></div>
+                        <div class="login">
+                            <h1>Login</h1>
+                            <div class="links">
+                                <a href="{{ url_for('login') }}" class="active">Login</a>
+                            </div>
+                            <form action="{{ url_for('login') }}" method="post">
+                                <label for="username">
+                                    <i class="fas fa-user"></i>
+                                </label>
+                                <input type="text" name="username" placeholder="Username" id="username" required>
+                                <label for="password">
+                                    <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="password" placeholder="Password" id="password" required>
+                                <div class="msg">{{ msg }}</div>
+                                <input type="submit" value="Login">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

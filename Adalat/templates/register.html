@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+    <title>Register | Adalat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}"/>
+{% endblock %}
+
+{% block body %} 
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner bg-faded text-center rounded">
+                    <h2 class="section-heading mb-5">
+                        <span class="section-heading-upper">Register Now</span>
+                        <span class="section-heading-lower">Fill The Form Below</span>
+                    </h2>
+                    <div class="register">
+                        <h1>Register</h1>
+                        <div class="links">
+                            <a href="{{ url_for('login') }}">Login</a>
+                            <a href="{{ url_for('register_page') }}" class="active">Register</a>
+                        </div>
+                        <form action="{{ url_for('register_page') }}" method="post" autocomplete="off">
+                            <label for="username">
+                                <i class="fas fa-user"></i>
+                            </label>
+                            <input type="text" name="username" placeholder="Username" id="username" required>
+                            <label for="password">
+                                <i class="fas fa-lock"></i>
+                            </label>
+                            <input type="password" name="password" placeholder="Password" id="password" required>
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                            </label>
+                            <input type="email" name="email" placeholder="Email" id="email" required>
+                            <div class="msg">{{ msg }}</div>
+                            <input type="submit" value="Register">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
