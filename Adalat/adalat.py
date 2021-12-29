@@ -24,6 +24,9 @@ def home_page():
         return render_template('./admin/index.html', email=session['email'])
     return render_template('home.html')
 
+
+#### Login Routes ####
+
 #Admin Login
 @app.route("/home", methods=['GET', 'POST'])
 def login():
@@ -55,7 +58,7 @@ def login():
 @app.route("/login/citizen")
 def citizen_login_page():
     if 'loggedin' in session:
-        return render_template('./citizen/index.html', username=session['username'])
+        return render_template('./citizen/index.html', email=session['email'])
     return render_template('home.html')
 @app.route("/login/citizen", methods=['GET', 'POST'])
 def citizen_login():
@@ -77,7 +80,7 @@ def citizen_login():
             session['email'] = account['email']
             session['name'] = account['Name']
             # Redirect to home page
-            return render_template('./citizen/index.html', email=session['email'])
+            return render_template('./citizen/index.html', name=session['name'])
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -85,6 +88,11 @@ def citizen_login():
     return render_template('home.html', msg = msg)
 
 #Lawyer Login
+@app.route("/login/lawyer")
+def lawyer_login_page():
+    if 'loggedin' in session:
+        return render_template('./lawyer/index.html', email=session['email'])
+    return render_template('lawyer-login.html')
 @app.route("/login/lawyer", methods=['GET', 'POST'])
 def lawyer_login():
     msg = ''
@@ -94,22 +102,61 @@ def lawyer_login():
         password = request.form['password']
         # Check if account exists using MySQL
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM Citizen WHERE email = %s AND password = %s', (email, password,))
+        cursor.execute('SELECT * FROM Lawyer WHERE email = %s AND password = %s', (email, password,))
         # Fetch one record and return result
         account = cursor.fetchone()
         # If account exists in accounts table in out database
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
-            session['id'] = account['id']
+            session['id'] = account['LawyerId']
             session['email'] = account['email']
+            session['name'] = account['Name']
             # Redirect to home page
-            return render_template('./lawyer/index.html', email=session['email'])
+            return render_template('./lawyer/index.html', name=session['name'])
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect email/password!'
     # Show the login form with message (if any)
-    return render_template('home.html', msg = msg)
+    return render_template('lawyer-login.html', msg = msg)
+
+
+#Judge Login
+@app.route("/login/judge")
+def judge_login_page():
+    if 'loggedin' in session:
+        return render_template('./judge/index.html', name=session['name'])
+    return render_template('judge-login.html')
+@app.route("/login/judge", methods=['GET', 'POST'])
+def judge_login():
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form and 'password' in request.form:
+        # Create variables for easy access
+        email = request.form['email']
+        password = request.form['password']
+        # Check if account exists using MySQL
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM Judge WHERE email = %s AND password = %s', (email, password,))
+        # Fetch one record and return result
+        account = cursor.fetchone()
+        # If account exists in accounts table in out database
+        if account:
+            # Create session data, we can access this data in other routes
+            session['loggedin'] = True
+            session['id'] = account['JudgeId']
+            session['email'] = account['email']
+            session['name'] = account['Name']
+            # Redirect to home page
+            return render_template('./judge/index.html', name=session['name'])
+        else:
+            # Account doesnt exist or username/password incorrect
+            msg = 'Incorrect email/password!'
+    # Show the login form with message (if any)
+    return render_template('judge-login.html', msg = msg)
+
+
+#### Login Routes End ####
+
 
 #Logout API
 @app.route('/logout')
@@ -124,6 +171,10 @@ def logout():
 @app.route("/about")
 def about_page():
     return render_template('about.html')
+
+
+
+#### Registration Routes ####
 
 #Admin Registration
 @app.route("/register",)
@@ -260,8 +311,6 @@ def register_citizen():
         msg = 'Please fill out the form!'
     return render_template('register-citizen.html', msg=msg)
 
-
-
 #Lawyer Registration
 @app.route("/register/lawyer")
 def register_lawyer_page():
@@ -364,7 +413,6 @@ def register_lawyer():
         msg = 'Please fill out the form!'
     return render_template('register-lawyer.html', msg=msg)
 
-
 #Judge Registration
 @app.route("/register/judge")
 def register_judge_page():
@@ -399,7 +447,7 @@ def register_judge():
         pass_word = generate_random_password()
 
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('SELECT * FROM Citizen WHERE email = %s', (email,))
+        cursor.execute('SELECT * FROM Judge WHERE email = %s', (email,))
         account = cursor.fetchone()
 
         if account:
@@ -410,7 +458,7 @@ def register_judge():
             msg = 'Please fill out the form!'
         else:
             
-            cursor.execute('INSERT INTO Citizen (Name,email,contact,address,password) VALUES (%s, %s, %s, %s, %s)', (name, email, contact, address, pass_word,))
+            cursor.execute('INSERT INTO Judge (Name,email,contact,address,password) VALUES (%s, %s, %s, %s, %s)', (name, email, contact, address, pass_word,))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
 
@@ -465,6 +513,6 @@ def register_judge():
     
     elif request.method == 'POST':
         msg = 'Please fill out the form!'
-    return render_template('register-citizen.html', msg=msg)
+    return render_template('register-judge.html', msg=msg)
 
-    
+#### Registration Routes End####

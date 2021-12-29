@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %} 
-    <title>Lawyer - Login | Adalat</title>
+    <title>Judge - Login | Adalat</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}"/>
 {% endblock %}
 
@@ -15,13 +15,13 @@
                         <span class="section-heading-lower">Welcome Back</span>
                     </h2>
                     <div class="login">
-                        <h1>Lawyer Login</h1>
+                        <h1>Judge Login</h1>
                         <div class="links">
                             <a href="{{ url_for('login') }}#citizenLogin">Login</a>
-                            <a href="{{ url_for('lawyer_login_page') }}#lawyerLogin" class="active">Lawyer Login</a>
-                            <a href="{{ url_for('judge_login_page') }}#judgeLogin">Judge Login</a>
+                            <a href="{{ url_for('lawyer_login_page') }}#lawyerLogin">Lawyer Login</a>
+                            <a href="{{ url_for('judge_login_page') }}#judgeLogin" class="active">Judge Login</a>
                         </div>
-                        <form action="{{ url_for('lawyer_login') }}" method="post">
+                        <form action="{{ url_for('judge_login') }}" method="post">
                             <label for="email">
                                 <i class="fas fa-user"></i>
                             </label>

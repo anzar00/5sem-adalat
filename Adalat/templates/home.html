@@ -19,7 +19,8 @@
                             <h1>Citizen Login</h1>
                             <div class="links">
                                 <a href="{{ url_for('login') }}#citizenLogin" class="active">Login</a>
-                                <a href="{{ url_for('lawyer_login') }}#lawyerLogin">Lawyer Login</a>
+                                <a href="{{ url_for('lawyer_login_page') }}#lawyerLogin">Lawyer Login</a>
+                                <a href="{{ url_for('judge_login_page') }}#judgeLogin">Judge Login</a>
                             </div>
                             <form action="{{ url_for('citizen_login') }}" method="post">
                                 <label for="email">
