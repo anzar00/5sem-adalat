@@ -84,7 +84,7 @@ def citizen_login():
     # Show the login form with message (if any)
     return render_template('home.html', msg = msg)
 
-
+#Lawyer Login
 @app.route("/login/lawyer", methods=['GET', 'POST'])
 def lawyer_login():
     msg = ''
