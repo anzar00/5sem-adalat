@@ -11,20 +11,21 @@
             <div class="container">
                 <div class="intro">
                     <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="./static/assets/img/intro1.jpg" alt="..." />
-                    <div class="intro-text left-0 text-center bg-faded p-5 rounded">
+                    <div class="intro-text left-0 text-center bg-faded p-5 rounded" id="citizenLogin">
                         <h2 class="section-heading mb-4">
                             <span class="section-heading-lower">Welcome Back</span>
                         </h2>
                         <div class="login">
-                            <h1>Login</h1>
+                            <h1>Citizen Login</h1>
                             <div class="links">
-                                <a href="{{ url_for('login') }}" class="active">Login</a>
+                                <a href="{{ url_for('login') }}#citizenLogin" class="active">Login</a>
+                                <a href="{{ url_for('lawyer_login') }}#lawyerLogin">Lawyer Login</a>
                             </div>
-                            <form action="{{ url_for('login') }}" method="post">
-                                <label for="username">
+                            <form action="{{ url_for('citizen_login') }}" method="post">
+                                <label for="email">
                                     <i class="fas fa-user"></i>
                                 </label>
-                                <input type="text" name="username" placeholder="Username" id="username" required>
+                                <input type="text" name="email" placeholder="Email" id="email" required>
                                 <label for="password">
                                     <i class="fas fa-lock"></i>
                                 </label>
@@ -38,15 +39,31 @@
             </div>
         </section>
         <section class="page-section cta">
-            <div class="container">
+            <div class="container" id="adminLogin">
                 <div class="row">
                     <div class="col-xl-9 mx-auto">
                         <div class="cta-inner bg-faded text-center rounded">
                             <h2 class="section-heading mb-4">
-                                <span class="section-heading-upper">Our Promise</span>
-                                <span class="section-heading-lower">To You</span>
+                                <span class="section-heading-upper">Admin - LogIn</span>
                             </h2>
-                            <p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you with friendly service, a welcoming atmosphere, and above all else, excellent products made with the highest quality ingredients. If you are not satisfied, please let us know and we will do whatever we can to make things right!</p>
+                            <div class="login">
+                                <h1>Login</h1>
+                                <div class="links">
+                                    <a href="{{ url_for('login') }}#adminLogin" class="active">Login</a>
+                                </div>
+                                <form action="{{ url_for('login') }}" method="post">
+                                    <label for="username">
+                                        <i class="fas fa-user"></i>
+                                    </label>
+                                    <input type="text" name="username" placeholder="Username" id="username" required>
+                                    <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                    </label>
+                                    <input type="password" name="password" placeholder="Password" id="password" required>
+                                    <div class="msg">{{ msg }}</div>
+                                    <input type="submit" value="Login">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

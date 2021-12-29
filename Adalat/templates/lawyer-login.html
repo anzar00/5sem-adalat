@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %} 
+    <title>Lawyer - Login | Adalat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}"/>
+{% endblock %}
+
+{% block body %} 
+<section class="page-section cta">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <div class="cta-inner bg-faded text-center rounded">
+                    <h2 class="section-heading mb-4">
+                        <span class="section-heading-lower">Welcome Back</span>
+                    </h2>
+                    <div class="login">
+                        <h1>Lawyer Login</h1>
+                        <div class="links">
+                            <a href="{{ url_for('login') }}#citizenLogin">Login</a>
+                            <a href="{{ url_for('lawyer_login') }}#lawyerLogin" class="active">Lawyer Login</a>
+                        </div>
+                        <form action="{{ url_for('login') }}" method="post">
+                            <label for="email">
+                                <i class="fas fa-user"></i>
+                            </label>
+                            <input type="text" name="email" placeholder="Email" id="email" required>
+                            <label for="password">
+                                <i class="fas fa-lock"></i>
+                            </label>
+                            <input type="password" name="password" placeholder="Password" id="password" required>
+                            <div class="msg">{{ msg }}</div>
+                            <input type="submit" value="Login">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
