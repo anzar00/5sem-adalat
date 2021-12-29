@@ -19,8 +19,8 @@
                         <h1>Register</h1>
                         <div class="links">
                             <a href="{{ url_for('register_page') }}">Register</a>
-                            <a href="{{ url_for('register_citizen_page') }}" class="active">Citizen</a>
-                            <a href="{{ url_for('register_lawyer_page') }}">Lawyer</a>
+                            <a href="{{ url_for('register_citizen_page') }}">Citizen</a>
+                            <a href="{{ url_for('register_lawyer_page') }}" class="active">Lawyer</a>
                             <a href="{{ url_for('register_judge_page') }}">Judge</a>
                         </div>
                         <form action="{{ url_for('register_citizen') }}" method="post" autocomplete="off">

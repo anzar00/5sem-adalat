@@ -261,4 +261,210 @@ def register_citizen():
     return render_template('register-citizen.html', msg=msg)
 
 
+
+#Lawyer Registration
+@app.route("/register/lawyer")
+def register_lawyer_page():
+    return render_template('register-lawyer.html')
+@app.route("/register/lawyer", methods=['GET', 'POST'])
+def register_lawyer():
+    msg = ''
+    if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'contact' in request.form and 'address' in request.form:
+        name = request.form['name']
+        email = request.form['email']
+        contact = request.form['contact']
+        address = request.form['address']
+
+        #Random Password Generation
+        characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
+
+        def generate_random_password():
+
+            length = 8
+            random.shuffle(characters)
+            password = []
+                
+            for i in range(length):
+                password.append(random.choice(characters))
+                
+            random.shuffle(password)
+
+            return ("".join(password))
+
+        #Password Generation End
+
+        pass_word = generate_random_password()
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM Lawyer WHERE email = %s', (email,))
+        account = cursor.fetchone()
+
+        if account:
+            msg = 'Account already exists!'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+        elif not name or not contact or not address:
+            msg = 'Please fill out the form!'
+        else:
+            
+            cursor.execute('INSERT INTO Lawyer (Name,email,contact,address,password) VALUES (%s, %s, %s, %s, %s)', (name, email, contact, address, pass_word,))
+            mysql.connection.commit()
+            msg = 'You have successfully registered!'
+
+            # Sending Mail
+            
+
+            sender_email = "adalat.app@gmail.com"
+            receiver_email = email
+            password = 'Adalat@123$'
+
+            message = MIMEMultipart("alternative")
+            message["Subject"] = ("Dear "+ name +" , Please Note Your Credentials For Adalat")
+            message["From"] = sender_email
+            message["To"] = receiver_email
+
+            # Create the plain-text and HTML version of your message
+            text = """\
+            Hi, """+name+"""
+            Please note your credentials for Adalat<br>
+            Your Email is - """+email+""", and
+            Password is - ""+pass_word+
+            """
+            html = """\
+            <html>
+            <body>
+                <p>Hi,"""+name+"""<br>
+                Please note your credentials for Adalat<br>
+                Your <b>Email</b> is - """+email+""", and<br>
+                <b>Password</b> is - """+pass_word+"""
+                </p>
+            </body>
+            </html>
+            """
+
+            # Turn these into plain/html MIMEText objects
+            part1 = MIMEText(text, "plain")
+            part2 = MIMEText(html, "html")
+
+            # Add HTML/plain-text parts to MIMEMultipart message
+            # The email client will try to render the last part first
+            message.attach(part1)
+            message.attach(part2)
+
+            # Create secure connection with server and send email
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+                server.login(sender_email, password)
+                server.sendmail(
+                    sender_email, receiver_email, message.as_string()
+                )
+            # End Mail 
+    
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return render_template('register-lawyer.html', msg=msg)
+
+
+#Judge Registration
+@app.route("/register/judge")
+def register_judge_page():
+    return render_template('register-judge.html')
+@app.route("/register/judge", methods=['GET', 'POST'])
+def register_judge():
+    msg = ''
+    if request.method == 'POST' and 'name' in request.form and 'email' in request.form and 'contact' in request.form and 'address' in request.form:
+        name = request.form['name']
+        email = request.form['email']
+        contact = request.form['contact']
+        address = request.form['address']
+
+        #Random Password Generation
+        characters = list(string.ascii_letters + string.digits + "!@#$%^&*()")
+
+        def generate_random_password():
+
+            length = 8
+            random.shuffle(characters)
+            password = []
+                
+            for i in range(length):
+                password.append(random.choice(characters))
+                
+            random.shuffle(password)
+
+            return ("".join(password))
+
+        #Password Generation End
+
+        pass_word = generate_random_password()
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM Citizen WHERE email = %s', (email,))
+        account = cursor.fetchone()
+
+        if account:
+            msg = 'Account already exists!'
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            msg = 'Invalid email address!'
+        elif not name or not contact or not address:
+            msg = 'Please fill out the form!'
+        else:
+            
+            cursor.execute('INSERT INTO Citizen (Name,email,contact,address,password) VALUES (%s, %s, %s, %s, %s)', (name, email, contact, address, pass_word,))
+            mysql.connection.commit()
+            msg = 'You have successfully registered!'
+
+            # Sending Mail
+            
+
+            sender_email = "adalat.app@gmail.com"
+            receiver_email = email
+            password = 'Adalat@123$'
+
+            message = MIMEMultipart("alternative")
+            message["Subject"] = ("Dear "+ name +" , Please Note Your Credentials For Adalat")
+            message["From"] = sender_email
+            message["To"] = receiver_email
+
+            # Create the plain-text and HTML version of your message
+            text = """\
+            Hi, """+name+"""
+            Please note your credentials for Adalat<br>
+            Your Email is - """+email+""", and
+            Password is - ""+pass_word+
+            """
+            html = """\
+            <html>
+            <body>
+                <p>Hi,"""+name+"""<br>
+                Please note your credentials for Adalat<br>
+                Your <b>Email</b> is - """+email+""", and<br>
+                <b>Password</b> is - """+pass_word+"""
+                </p>
+            </body>
+            </html>
+            """
+
+            # Turn these into plain/html MIMEText objects
+            part1 = MIMEText(text, "plain")
+            part2 = MIMEText(html, "html")
+
+            # Add HTML/plain-text parts to MIMEMultipart message
+            # The email client will try to render the last part first
+            message.attach(part1)
+            message.attach(part2)
+
+            # Create secure connection with server and send email
+            context = ssl.create_default_context()
+            with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+                server.login(sender_email, password)
+                server.sendmail(
+                    sender_email, receiver_email, message.as_string()
+                )
+            # End Mail 
+    
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    return render_template('register-citizen.html', msg=msg)
+
     
