@@ -5,21 +5,21 @@
 {% endblock %}
 
 {% block body %} 
-<h1 class="mt-4">Add Lawyer</h1>
+<h1 class="mt-4">Add Judge</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item">Actions</li>
-        <li class="breadcrumb-item active">Add Lawyer</li>
+        <li class="breadcrumb-item active">Add Judge</li>
     </ol>
     <hr>
     <div class="card-body">
         <div class="card mb-4">
             <div class="card-body">
                 <p class="mb-0">
-                    Fill the details and click on Add Lawyer.
+                    Fill the details and click on Add Judge.
                 </p>
             </div>
         </div>
-        <form action="{{ url_for('add_lawyer') }}" method="post" autocomplete="off">
+        <form action="{{ url_for('add_judge') }}" method="post" autocomplete="off">
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="form-floating mb-3 mb-md-0">
@@ -48,7 +48,7 @@
             </div>
             <div class="msg">{{ msg }}</div>
             <div class="mt-4 mb-0">
-                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Add Lawyer"></div>
+                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Add Judge"></div>
             </div>
         </form>
         <hr>
@@ -56,7 +56,7 @@
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            All Lawyers
+            All Judges
         </div>
         <div class="card-body">
             <table id="datatablesSimple">
@@ -79,13 +79,13 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    {% for l in lawyer: %}
-                        <tr>
-                            <td>{{l['LawyerId']}}</td>
-                            <td>{{l['Name']}}</td>
-                            <td>{{l['email']}}</td>
-                            <td>{{l['contact']}}</td>
-                            <td>{{l['address']}}</td>
+                    {% for j in judge: %}
+                    <tr>
+                        <td>{{j['JudgeId']}}</td>
+                        <td>{{j['Name']}}</td>
+                        <td>{{j['email']}}</td>
+                        <td>{{j['contact']}}</td>
+                        <td>{{j['address']}}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
