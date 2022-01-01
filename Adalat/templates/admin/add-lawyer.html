@@ -1,0 +1,54 @@
+{% extends './admin/base.html' %}
+
+{% block title %} 
+    <title>{{ username }} | Adalat</title>
+{% endblock %}
+
+{% block body %} 
+<h1 class="mt-4">Add Lawyer</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">Actions</li>
+        <li class="breadcrumb-item active">Add Lawyer</li>
+    </ol>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="mb-0">
+                    Fill the details and click on Add Lawyer.
+                </p>
+            </div>
+        </div>
+        <form action="{{ url_for('add_lawyer') }}" method="post" autocomplete="off">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="name" name="name" type="text" placeholder="Enter your Name" required/>
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" id="address" type="text" name="address" placeholder="Address" required/>
+                <label for="address">Address</label>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="contact" name="contact" type="text" placeholder="Enter Contact" required/>
+                        <label for="contact">Contact</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="email" name="email" type="email" placeholder="name@example.com" required/>
+                        <label for="email">Email address</label>
+                    </div>
+                </div>
+            </div>
+            <div class="msg">{{ msg }}</div>
+            <div class="mt-4 mb-0">
+                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Add Lawyer"></div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
