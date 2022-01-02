@@ -1,0 +1,95 @@
+{% extends './admin/base.html' %}
+
+{% block title %} 
+    <title>{{ username }} | Adalat</title>
+{% endblock %}
+
+{% block body %} 
+<h1 class="mt-4">Add Case</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item">Actions</li>
+        <li class="breadcrumb-item active">Add Case</li>
+    </ol>
+    <hr>
+    <div class="card-body">
+        <div class="card mb-4">
+            <div class="card-body">
+                <p class="mb-0">
+                    Fill the details to Add a New Case.
+                </p>
+            </div>
+        </div>
+        <form action="{{ url_for('add_case') }}" method="post" autocomplete="off">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="type" name="type" type="text" placeholder="Case Type" required/>
+                        <label for="type">Case Type</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control" id="details" type="text" name="details" placeholder="Case Details" required/>
+                <label for="details">Details</label>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="court_name" name="court_name" type="text" placeholder="Court Name" required/>
+                        <label for="court_name">Court Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating mb-3 mb-md-0">
+                        <input class="form-control" id="hearing" name="hearing" type="date" placeholder="Hearing Date" required/>
+                        <label for="hearing">Hearing Date</label>
+                    </div>
+                </div>
+            </div>
+            <div class="msg">{{ msg }}</div>
+            <div class="mt-4 mb-0">
+                <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Add Case"></div>
+            </div>
+        </form>
+        <hr>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            All Cases
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Case Id</th>
+                        <th>Type</th>
+                        <th>Court</th>
+                        <th>Last Hearing</th>
+                        <th>Next Hearing</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Case Id</th>
+                        <th>Type</th>
+                        <th>Court</th>
+                        <th>Last Hearing</th>
+                        <th>Next Hearing</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for c in case: %}
+                        <tr>
+                            <td>{{c['CaseId']}}</td>
+                            <td>{{c['type']}}</td>
+                            <td>{{c['court_name']}}</td>
+                            <td>{{c['LastHearing']}}</td>
+                            <td>{{c['NextHearing']}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

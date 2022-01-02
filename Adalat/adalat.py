@@ -749,5 +749,43 @@ def add_judge():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM Judge')
     judge = cursor.fetchall()  
-    return render_template('./admin/add-lawyer.html', msg=msg, username=session['username'], judge=judge)
+    return render_template('./admin/add-judge.html', msg=msg, username=session['username'], judge=judge)
 
+@app.route("/admin/add-case")
+def add_case_page():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM `Case`')
+    case = cursor.fetchall() 
+    return render_template('./admin/add-case.html',username=session['username'],case=case)
+
+@app.route("/admin/add-case", methods=['GET', 'POST'])
+def add_case():
+    msg = ''
+    if request.method == 'POST' and 'type' in request.form and 'details' in request.form and 'court_name' in request.form and 'hearing' in request.form:
+        type = request.form['type']
+        details = request.form['details']
+        court_name = request.form['court_name']
+        hearing = request.form['hearing']
+
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM `Case` WHERE type = %s AND details = %s', (type,details,))
+        case = cursor.fetchone()
+
+        if case:
+            msg = 'Case already added!'
+        elif not type or not details or not court_name or not hearing:
+            msg = 'Please fill out the form!'
+        else:
+            
+            cursor.execute('INSERT INTO `Case` (type,details,court_name,LastHearing,NextHearing) VALUES (%s, %s, %s, %s, %s)', (type, details, court_name, hearing, hearing,))
+            mysql.connection.commit()
+            msg = 'Case Added!'
+    
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM `Case`')
+    case = cursor.fetchall()  
+    return render_template('./admin/add-case.html', msg=msg, username=session['username'], case=case)
