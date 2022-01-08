@@ -30,10 +30,6 @@ def home_page():
         return render_template('./admin/index.html',  username=session['username'],count=count, lawyer = lawyer)
     return render_template('home.html')
 
-
-
-
-
 #### Login Routes ####
 
 #Admin Login
@@ -66,11 +62,21 @@ def login():
     # Show the login form with message (if any)
     return render_template('home.html', msg = msg)
 
+
 #Citizen Login
-@app.route("/login/citizen")
+@app.route("/citizen/home")
 def citizen_login_page():
     if 'loggedin' in session:
-        return render_template('./citizen/index.html', email=session['email'])
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT COUNT(*) FROM `Case`')
+        count = cursor.fetchone()
+        cursor.execute('SELECT COUNT(*) FROM Lawyer')
+        count_l = cursor.fetchone()   
+        cursor.execute('SELECT COUNT(*) FROM Judge')
+        count_j = cursor.fetchone()   
+        cursor.execute('SELECT COUNT(*) FROM Citizen')
+        count_c = cursor.fetchone()  
+        return render_template('./citizen/index.html', uname=session['name'],count=count,count_l=count_l,count_j=count_j,count_c=count_c)
     return render_template('home.html')
 @app.route("/login/citizen", methods=['GET', 'POST'])
 def citizen_login():
@@ -91,8 +97,17 @@ def citizen_login():
             session['id'] = account['ClientId']
             session['email'] = account['email']
             session['name'] = account['Name']
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT COUNT(*) FROM `Case`')
+            count = cursor.fetchone()  
+            cursor.execute('SELECT COUNT(*) FROM Lawyer')
+            count_l = cursor.fetchone()  
+            cursor.execute('SELECT COUNT(*) FROM Judge')
+            count_j = cursor.fetchone()   
+            cursor.execute('SELECT COUNT(*) FROM Citizen')
+            count_c = cursor.fetchone()   
             # Redirect to home page
-            return render_template('./citizen/index.html', name=session['name'])
+            return render_template('./citizen/index.html', uname=session['name'],count=count,count_l=count_l,count_j=count_j,count_c=count_c)
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'
