@@ -23,11 +23,17 @@ mysql = MySQL(app)
 def home_page():
     if 'loggedin' in session:
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT COUNT(*) FROM `Case`')
+        count = cursor.fetchone()
         cursor.execute('SELECT COUNT(*) FROM Lawyer')
-        count = cursor.fetchall()
+        l_count = cursor.fetchone()
+        cursor.execute('SELECT COUNT(*) FROM Judge')
+        j_count = cursor.fetchone()
+        cursor.execute("SELECT COUNT(*) FROM `Case` WHERE status = 'Pending'")
+        p_count = cursor.fetchone()
         cursor.execute('SELECT * FROM Lawyer')
         lawyer = cursor.fetchall()    
-        return render_template('./admin/index.html',  username=session['username'],count=count, lawyer = lawyer)
+        return render_template('./admin/index.html',  username=session['username'],count=count,l_count=l_count,j_count=j_count,p_count=p_count,lawyer = lawyer)
     return render_template('home.html')
 
 #### Login Routes ####
@@ -53,9 +59,17 @@ def login():
             session['username'] = account['username']
             # Redirect to home page
             cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            cursor.execute('SELECT COUNT(*) FROM `Case`')
+            count = cursor.fetchone()
             cursor.execute('SELECT COUNT(*) FROM Lawyer')
-            count = cursor.fetchall()
-            return render_template('./admin/index.html', username=session['username'],count=count)
+            l_count = cursor.fetchone()
+            cursor.execute('SELECT COUNT(*) FROM Judge')
+            j_count = cursor.fetchone()
+            cursor.execute("SELECT COUNT(*) FROM `Case` WHERE status = 'Pending'")
+            p_count = cursor.fetchone()
+            cursor.execute('SELECT * FROM Lawyer')
+            lawyer = cursor.fetchall()    
+            return render_template('./admin/index.html',  username=session['username'],count=count,l_count=l_count,j_count=j_count,p_count=p_count,lawyer = lawyer)
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username/password!'

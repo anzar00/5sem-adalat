@@ -14,17 +14,15 @@
         <div class="card bg-primary text-white mb-4">
             <div class="card-body">Total Cases Registered</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <h1 class="small text-white stretched-link" >{{count["COUNT(*)"]}}</h1>
             </div>
         </div>
     </div>
     <div class="col-xl-3 col-md-6">
         <div class="card bg-warning text-white mb-4">
-            <div class="card-body">Total Lawyers - {{count["COUNT(*)"]}}</div>
+            <div class="card-body">Total Lawyers</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <h1 class="small text-white stretched-link" >{{l_count["COUNT(*)"]}}</h1>
             </div>
         </div>
     </div>
@@ -32,8 +30,7 @@
         <div class="card bg-success text-white mb-4">
             <div class="card-body">Total Judges</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <h1 class="small text-white stretched-link" >{{j_count["COUNT(*)"]}}</h1>
             </div>
         </div>
     </div>
@@ -41,8 +38,7 @@
         <div class="card bg-danger text-white mb-4">
             <div class="card-body">Cases Pending</div>
             <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="#">View Details</a>
-                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                <h1 class="small text-white stretched-link" >{{p_count["COUNT(*)"]}}</h1>
             </div>
         </div>
     </div>
@@ -86,5 +82,5 @@
         </div>
     </div>
 </div>
-    <p>Works Fine {{ username }}</p> {{ username }} {{count}}
+    <p>Works Fine {{ username }}</p> {{ username }}
 {% endblock %}
