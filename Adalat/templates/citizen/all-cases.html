@@ -1,0 +1,69 @@
+{% extends './citizen/base.html' %}
+
+{% block title %}
+<title>{{ uname }} | Adalat</title>
+{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-4">Cases</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">All Cases</li>
+</ol>
+{% if count['count(*)'] == 0 : %}
+<div class="card mb-4">
+    <div class="card-body">
+        <p class="mb-0">
+            There are no cases currently registered on the portal.<br>
+            You can file one from menu.
+        </p>
+    </div>
+</div>
+{% else %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        All Cases
+    </div>
+
+    <div class="card-body">
+        <table id="datatablesSimple">
+            <thead>
+                <tr>
+                    <th>Case Id</th>
+                    <th>Type</th>
+                    <th>Court</th>
+                    <th>Last Hearing</th>
+                    <th>Next Hearing</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Case Id</th>
+                    <th>Type</th>
+                    <th>Court</th>
+                    <th>Last Hearing</th>
+                    <th>Next Hearing</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for c in case: %}
+                    <tr>
+                        <td>{{c['CaseId']}}</td>
+                        <td>{{c['type']}}</td>
+                        <td>{{c['court_name']}}</td>
+                        <td>{{c['LastHearing']}}</td>
+                        <td>{{c['NextHearing']}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock %}

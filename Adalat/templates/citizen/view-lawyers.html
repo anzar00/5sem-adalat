@@ -1,0 +1,29 @@
+{% extends './citizen/base.html' %}
+
+{% block title %}
+<title>{{ uname }} | Adalat</title>
+{% endblock %}
+
+{% block body %}
+
+<h1 class="mt-4">Lawyers</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">View / Hire</li>
+</ol>
+<div class="row">
+    {% for l in lawyer: %}
+    <div class="col-xl-4 col-md-6">
+        <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);max-width: 300px;margin: auto;text-align: center;font-family: arial;">
+            <h1 style="font-size: 35px;">{{l['Name']}}</h1>
+            <p class="title" style="color: grey;font-size: 16px;">{{l['email']}} <br> {{l['contact']}}</p>
+            <p>{{l['address']}}</p>
+            <p><button style="border: none;outline: 0;display: inline-block;padding: 8px;color: white;background-color: #0b5ed7;text-align: center;cursor: pointer;width: 100%;font-size: 18px;">Contact / Hire</button></p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock %}

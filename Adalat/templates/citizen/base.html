@@ -55,8 +55,8 @@
                             </a>
                             <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">All Cases</a>
-                                    <a class="nav-link" href="#">My Cases</a>
+                                    <a class="nav-link" href="{{url_for('view_all_cases_page')}}">All Cases</a>
+                                    <a class="nav-link" href="{{url_for('my_cases_page')}}">My Cases</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -66,8 +66,7 @@
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link" href="#">View</a>
-                                    <a class="nav-link" href="#">Hire</a>
+                                    <a class="nav-link" href="{{url_for('view_laywers_page')}}">View / Hire</a>
                                 </nav>
                             </div>
                         </div>

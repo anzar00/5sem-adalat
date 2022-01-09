@@ -818,3 +818,35 @@ def add_case():
     cursor.execute('SELECT * FROM `Case`')
     case = cursor.fetchall()  
     return render_template('./admin/add-case.html', msg=msg, username=session['username'], case=case)
+
+### Admin Routes End ###
+
+### Citizen Routes ###
+
+@app.route("/citizen/view-lawyers")
+def view_laywers_page():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM Lawyer')
+    lawyer = cursor.fetchall() 
+    return render_template('./citizen/view-lawyers.html',uname=session['name'],lawyer=lawyer)
+
+@app.route("/citizen/all-cases")
+def view_all_cases_page():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT count(*) FROM `Case`')
+    count = cursor.fetchone() 
+    cursor.execute('SELECT * FROM `Case`')
+    case = cursor.fetchall() 
+    return render_template('./citizen/all-cases.html',uname=session['name'],count=count,case=case)
+
+@app.route("/citizen/my-cases")
+def my_cases_page():
+    email = session['email']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT count(*) FROM `Case` WHERE ClientId = (SELECT ClientId FROM Citizen WHERE email = %s)',(email,))
+    count = cursor.fetchone() 
+    cursor.execute('SELECT * FROM `Case` WHERE ClientId = (SELECT ClientId FROM Citizen WHERE email = %s)',(email,))
+    case = cursor.fetchall() 
+    return render_template('./citizen/my-cases.html',uname=session['name'],count=count,case=case)
+
+### Citizen Routes End ###
