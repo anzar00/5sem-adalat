@@ -1,9 +1,46 @@
-{% extends './admin/base.html' %}
+{% extends './lawyer/base.html' %}
 
 {% block title %} 
-    <title>{{ username }} | Adalat</title>
+    <title>{{ name }} | Adalat</title>
 {% endblock %}
     
 {% block body %} 
-    <p>Works Fine</p>
+<h1 class="mt-4">Dashboard</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-danger text-white mb-4">
+            <div class="card-body">Total Cases</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <h1 class="small text-white stretched-link" >{{count["COUNT(*)"]}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-warning text-white mb-4">
+            <div class="card-body">Cases Assigned To Me</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <h1 class="small text-white stretched-link" >{{count_l["COUNT(*)"]}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-success text-white mb-4">
+            <div class="card-body">Active Cases</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <h1 class="small text-white stretched-link" >{{count_a["COUNT(*)"]}}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Closed Cases</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <h1 class="small text-white stretched-link" >{{count_c["COUNT(*)"]}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

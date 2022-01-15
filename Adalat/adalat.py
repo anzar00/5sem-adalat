@@ -132,7 +132,17 @@ def citizen_login():
 @app.route("/login/lawyer")
 def lawyer_login_page():
     if 'loggedin' in session:
-        return render_template('./lawyer/index.html', email=session['email'])
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        email = session['email']
+        cursor.execute('SELECT COUNT(*) FROM `Case`')
+        count = cursor.fetchone()
+        cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s)',(email,))
+        count_l = cursor.fetchone()   
+        cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s) AND status = "Pending"',(email,))
+        count_a = cursor.fetchone()   
+        cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s) AND status = "Closed"',(email,))
+        count_c = cursor.fetchone() 
+        return render_template('./lawyer/index.html', name=session['name'],count=count,count_l=count_l,count_a=count_a,count_c=count_c)
     return render_template('lawyer-login.html')
 @app.route("/login/lawyer", methods=['GET', 'POST'])
 def lawyer_login():
@@ -154,7 +164,17 @@ def lawyer_login():
             session['email'] = account['email']
             session['name'] = account['Name']
             # Redirect to home page
-            return render_template('./lawyer/index.html', name=session['name'])
+            cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+            email = session['email']
+            cursor.execute('SELECT COUNT(*) FROM `Case`')
+            count = cursor.fetchone()
+            cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s)',(email,))
+            count_l = cursor.fetchone()   
+            cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s) AND status = "Pending"',(email,))
+            count_a = cursor.fetchone()   
+            cursor.execute('SELECT COUNT(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s) AND status = "Closed"',(email,))
+            count_c = cursor.fetchone() 
+            return render_template('./lawyer/index.html', name=session['name'],count=count,count_l=count_l,count_a=count_a,count_c=count_c)
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect email/password!'
@@ -849,4 +869,25 @@ def my_cases_page():
     case = cursor.fetchall() 
     return render_template('./citizen/my-cases.html',uname=session['name'],count=count,case=case)
 
+
+@app.route("/citizen/file-case")
+def file_case():
+    return render_template('./citizen/file-case.html',uname=session['name'])
+
 ### Citizen Routes End ###
+
+
+### Lawyer Routes ###
+@app.route("/lawyer/my-cases")
+def my_cases_lawyer():
+    email = session['email']
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT count(*) FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s)',(email,))
+    count = cursor.fetchone() 
+    cursor.execute('SELECT * FROM `Case` WHERE LawyerId = (SELECT LawyerId FROM Lawyer WHERE email = %s)',(email,))
+    case = cursor.fetchall() 
+    return render_template('./lawyer/my-cases.html',name=session['name'],count=count,case=case)
+
+
+
+### Lawyer Routes End ###
