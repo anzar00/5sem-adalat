@@ -1,6 +1,8 @@
 {% extends './citizen/base.html' %}
 
 {% block title %}
+<link rel="stylesheet" href="{{ url_for('static', filename='FileCase/assets/style.css')}}" />
+<script src="{{ url_for('static', filename='FileCase/assets/script.js')}}" defer></script>
 <title>{{ uname }} | Adalat</title>
 {% endblock %}
 
@@ -10,5 +12,240 @@
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active">File New Case</li>
 </ol>
+<div class="row">
+    <div class="col-xl-6">
+        <form action="#" method=post class="form" enctype=multipart/form-data>
+            <h1 class="text-center">File In Person</h1>
+            <!-- Progress bar -->
+            <div class="progressbar">
+                <div class="progress" id="progress"></div>
+                <div class="progress-step progress-step-active" data-title="New Case"></div>
+                <div class="progress-step" data-title="Petitioner"></div>
+                <div class="progress-step" data-title="Respondant"></div>
+                <div class="progress-step" data-title="Case"></div>
+                <div class="progress-step" data-title="Act"></div>
+            </div>
 
+            <!-- Steps -->
+            <div class="form-step form-step-active">
+                <center>Where to File?</center>
+                <div class="input-group">
+                    <label for="hcname">High Court Of</label>
+                    <input type="text" name="hcname" id="hcname" />
+                </div>
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <input type="radio" id="civil" name="matter" value="CIVIL">
+                        </div>
+                        <div class="col-xl-3">
+                            <label for="civil">CIVIL</label>   
+                        </div>
+                        <div class="col-xl-3">
+                            <input type="radio" id="criminal" name="matter" value="CRIMINAL">
+                        </div>
+                        <div class="col-xl-3">
+                            <label for="criminal">CRIMINAL</label><br> 
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="mattert">Matter Type</label>
+                    <select name="mattert" id="mattert">
+                        <option value="Labour Matters">Labour Matters</option>
+                        <option value="Rent Act Matters">Rent Act Matters</option>
+                        <option value="Direct Taxes Matter">Direct Taxes Matter</option>
+                        <option value="Indirect Taxes Matters">Indirect Taxes Matters</option>
+                        <option value="Land Acquisition & Requisition Matters">Land Acquisition & Requisition Matters</option>
+                        <option value="Service Matters">Service Matters</option>
+                        <option value="Academic Matters">Academic Matters</option>
+                        <option value="	Letter Petition & Pil Matters">Letter Petition & Pil Matters</option>
+                        <option value="Election Matters">Election Matters</option>
+                        <option value="Family Law Matters">Family Law Matters</option>
+                        <option value="Arbitration Matters">Arbitration Matters</option>
+                        <option value="Compensation Matters">Compensation Matters</option>
+                        <option value="Habeas Corpus Matters">Habeas Corpus Matters</option>
+                        <option value="Criminal Matters">Criminal Matters</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <input type="radio" id="urgent" name="mattern" value="Urgent">
+                        </div>
+                        <div class="col-xl-3">
+                            <label for="urgent">Urgent</label>   
+                        </div>
+                        <div class="col-xl-3">
+                            <input type="radio" id="ordinary" name="mattern" value="Ordinary">
+                        </div>
+                        <div class="col-xl-3">
+                            <label for="ordinary">Ordinary</label><br> 
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <a href="#" class="btn btn-next width-50 ml-auto"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Next</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="cname">Complainant / Petitioner</label>
+                    <input type="text" name="cname" id="cname" />
+                </div>
+                <div class="input-group">
+                    <label for="cdob">Date Of Birth</label>
+                    <input type="date" name="cdob" id="cdob" />
+                </div>
+                <div class="input-group">
+                    <label for="cgender">Gender</label>
+                    <select name="cgender" id="cgender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="cphone">Phone</label>
+                    <input type="text" name="cphone" id="cphone" />
+                </div>
+                <div class="input-group">
+                    <label for="cemail">Email</label>
+                    <input type="text" name="cemail" id="cemail" />
+                </div>
+                <div class="input-group">
+                    <label for="caddress">Address</label>
+                    <textarea id="caddress" name="caddress" rows="4" cols="50">
+                    </textarea>
+                </div>
+                <div class="input-group">
+                    <label for="cstate">State</label>
+                    <input type="text" name="cstate" id="cstate" />
+                    <label for="cdistrict">District</label>
+                    <input type="text" name="cdistrict" id="cdistrict" />
+                    <label for="cpincode">Pincode</label>
+                    <input type="text" name="cpincode" id="cpincode" />
+                </div>
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Previous</a>
+                    <a href="#" class="btn btn-next"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Next</a>
+                </div>
+            </div>
+            
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="rname">Respondant</label>
+                    <input type="text" name="rname" id="rname" />
+                </div>
+                <div class="input-group">
+                    <label for="rdob">Date Of Birth</label>
+                    <input type="date" name="rdob" id="rdob" />
+                    <label for="rage">Age</label>
+                    <input type="number" name="rage" id="rage" />
+                </div>
+                <div class="input-group">
+                    <label for="rgender">Gender</label>
+                    <select name="rgender" id="rgender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="rphone">Phone</label>
+                    <input type="text" name="rphone" id="rphone" />
+                </div>
+                <div class="input-group">
+                    <label for="remail">Email</label>
+                    <input type="text" name="remail" id="remail" />
+                </div>
+                <div class="input-group">
+                    <label for="raddress">Address</label>
+                    <textarea id="raddress" name="raddress" rows="4" cols="50">
+                    </textarea>
+                </div>
+                <div class="input-group">
+                    <label for="rstate">State</label>
+                    <input type="text" name="rstate" id="rstate" />
+                    <label for="rdistrict">District</label>
+                    <input type="text" name="rdistrict" id="rdistrict" />
+                    <label for="rpincode">Pincode</label>
+                    <input type="text" name="rpincode" id="rpincode" />
+                </div>
+                
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Previous</a>
+                    <a href="#" class="btn btn-next"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Next</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="coa">Cause Of Action</label>
+                    <input type="text" name="coa" id="coa" />
+                </div>
+                <div class="input-group">
+                    <label for="dcoa">Date Of Cause Of Action</label>
+                    <input type="date" name="dcoa" id="dcoa" />
+                </div>
+                <div class="input-group">
+                    <label for="fm">Factual Matrix</label>
+                    <input type="text" name="fm" id="fm" />
+                </div>
+                <div class="input-group">
+                    <label for="prayer">Prayer</label>
+                    <input type="text" name="prayer" id="prayer" />
+                </div>
+                <div class="input-group">
+                    <label for="grounds">Grounds</label>
+                    <textarea id="grounds" name="grounds" rows="4" cols="50">
+                    </textarea>
+                </div>
+                <center>Dispute Arising Out Of</center>
+                <div class="input-group">
+                    <label for="state">State</label>
+                    <input type="text" name="state" id="state" />
+                </div>
+                <div class="input-group">
+                    <label for="district">District</label>
+                    <input type="text" name="district" id="district" />
+                </div>
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Previous</a>
+                    <a href="#" class="btn btn-next"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Next</a>
+                </div>
+            </div>
+
+            <div class="form-step">
+                <div class="input-group">
+                    <label for="act">Act</label>
+                    <input type="text" name="act" id="act" />
+                </div>
+                <div class="input-group">
+                    <label for="acts">Act Section</label>
+                    <input type="text" name="acts" id="acts" />
+                </div>
+                
+                <div class="btns-group">
+                    <a href="#" class="btn btn-prev"
+                        style="background-color: var(--primary-color);color: #f3f3f3;">Previous</a>
+                    <input type="submit" value="Submit" class="btn"
+                        style="background-color: var(--primary-color);color: #f3f3f3;" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-xl-6">
+
+    </div>
+</div>
 {% endblock %}
