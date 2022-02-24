@@ -17,7 +17,7 @@
             <h1 style="font-size: 35px;">{{l['Name']}}</h1>
             <p class="title" style="color: grey;font-size: 16px;">{{l['email']}} <br> {{l['contact']}}</p>
             <p>{{l['address']}}</p>
-            <p><button style="border: none;outline: 0;display: inline-block;padding: 8px;color: white;background-color: #0b5ed7;text-align: center;cursor: pointer;width: 100%;font-size: 18px;">Contact / Hire</button></p>
+            <a href="mailto:{{l['email']}}"><p><button style="border: none;outline: 0;display: inline-block;padding: 8px;color: white;background-color: #0b5ed7;text-align: center;cursor: pointer;width: 100%;font-size: 18px;">Contact / Hire</button></p></a>
         </div>
     </div>
     {% endfor %}

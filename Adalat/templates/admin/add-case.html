@@ -11,6 +11,124 @@
         <li class="breadcrumb-item active">Add Case</li>
     </ol>
     <hr>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Applications Filed
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Filing Id</th>
+                        <th>CourtName</th>
+                        <th>MatterNature</th>
+                        <th>MatterType</th>
+                        <th>Urgency</th>
+                        <th>Petitioner</th>
+                        <th>PDOB</th>
+                        <th>PGender</th>
+                        <th>PPhone</th>
+                        <th>PEmail</th>
+                        <th>PState</th>
+                        <th>PDistrict</th>
+                        <th>PPincode</th>
+                        <th>Respondant</th>
+                        <th>RDOB</th>
+                        <th>RAge</th>
+                        <th>RGender</th>
+                        <th>RPhone</th>
+                        <th>REmail</th>
+                        <th>RState</th>
+                        <th>RDistrict</th>
+                        <th>RPincode</th>
+                        <th>COA</th>           
+                        <th>DateOfCOA</th>
+                        <th>FactualMatrix</th>
+                        <th>Prayer</th>        
+                        <th>Grounds</th>       
+                        <th>DState</th>        
+                        <th>DDistrict</th>     
+                        <th>Act</th>           
+                        <th>ActSection</th>   
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Filing Id</th>
+                        <th>CourtName</th>
+                        <th>MatterNature</th>
+                        <th>MatterType</th>
+                        <th>Urgency</th>
+                        <th>Petitioner</th>
+                        <th>PDOB</th>
+                        <th>PGender</th>
+                        <th>PPhone</th>
+                        <th>PEmail</th>
+                        <th>PState</th>
+                        <th>PDistrict</th>
+                        <th>PPincode</th>
+                        <th>Respondant</th>
+                        <th>RDOB</th>
+                        <th>RAge</th>
+                        <th>RGender</th>
+                        <th>RPhone</th>
+                        <th>REmail</th>
+                        <th>RState</th>
+                        <th>RDistrict</th>
+                        <th>RPincode</th>
+                        <th>COA</th>           
+                        <th>DateOfCOA</th>
+                        <th>FactualMatrix</th>
+                        <th>Prayer</th>        
+                        <th>Grounds</th>       
+                        <th>DState</th>        
+                        <th>DDistrict</th>     
+                        <th>Act</th>           
+                        <th>ActSection</th>   
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for c in file: %}
+                        <tr>
+                            <td>{{c['FilingId']}}</td>
+                            <td>{{c['CourtName']}}</td>
+                            <td>{{c['MatterNature']}}</td>
+                            <td>{{c['MatterType']}}</td>
+                            <td>{{c['Urgency']}}</td>
+                            <td>{{c['Petitioner']}}</td>
+                            <td>{{c['PDOB']}}</td>
+                            <td>{{c['PGender']}}</td>
+                            <td>{{c['PPhone']}}</td>
+                            <td>{{c['PEmail']}}</td>
+                            <td>{{c['PState']}}</td>
+                            <td>{{c['PDistrict']}}</td>
+                            <td>{{c['PPincode']}}</td>
+                            <td>{{c['Respondant']}}</td>
+                            <td>{{c['RDOB']}}</td>
+                            <td>{{c['RAge']}}</td>
+                            <td>{{c['RGender']}}</td>
+                            <td>{{c['RPhone']}}</td>
+                            <td>{{c['REmail']}}</td>
+                            <td>{{c['RState']}}</td>
+                            <td>{{c['RDistrict']}}</td>
+                            <td>{{c['RPincode']}}</td>
+                            <td>{{c['COA']}}</td>
+                            <td>{{c['DateOfCOA']}}</td>
+                            <td>{{c['FactualMatrix']}}</td>
+                            <td>{{c['Prayer']}}</td>
+                            <td>{{c['Grounds']}}</td>
+                            <td>{{c['DState']}}</td>
+                            <td>{{c['DDistrict']}}</td>
+                            <td>{{c['Act']}}</td>
+                            <td>{{c['ActSection']}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
     <div class="card-body">
         <div class="card mb-4">
             <div class="card-body">
@@ -53,7 +171,7 @@
         </form>
         <hr>
     </div>
-    <div class="card mb-4">
+    <!-- <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             All Cases
@@ -91,5 +209,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> -->
 {% endblock %}

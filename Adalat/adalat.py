@@ -803,9 +803,9 @@ def add_judge():
 @app.route("/admin/add-case")
 def add_case_page():
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM `Case`')
-    case = cursor.fetchall() 
-    return render_template('./admin/add-case.html',username=session['username'],case=case)
+    cursor.execute('SELECT * FROM CasesFiled')
+    file = cursor.fetchall() 
+    return render_template('./admin/add-case.html',username=session['username'],file=file)
 
 @app.route("/admin/add-case", methods=['GET', 'POST'])
 def add_case():
@@ -871,8 +871,70 @@ def my_cases_page():
 
 
 @app.route("/citizen/file-case")
-def file_case():
+def file_case_page():
     return render_template('./citizen/file-case.html',uname=session['name'])
+
+
+@app.route("/citizen/file-case", methods=['GET', 'POST'])
+def file_case():
+    msg = ''
+    if request.method == 'POST' and 'hcname' in request.form and 'mattert' in request.form and 'matter' in request.form and 'cname' in request.form:
+        
+        hcname = request.form['hcname']
+        matter = request.form['matter']
+        mattert = request.form['mattert']
+        urgency = request.form['mattern']
+
+        petitioner = request.form['cname']
+        pdob = request.form['cdob']
+        pgender = request.form['cgender']
+        pphone = request.form['cphone']
+        pemail = request.form['cemail']
+        pstate = request.form['cstate']
+        pdistrict = request.form['cdistrict']
+        ppincode = request.form['cpincode']
+
+        respondant = request.form['rname']
+        rdob = request.form['rdob']
+        rage = request.form['rage']
+        rgender = request.form['rgender']
+        rphone = request.form['rphone']
+        remail = request.form['remail']
+        rstate = request.form['rstate']
+        rdistrict = request.form['rdistrict']
+        rpincode = request.form['rpincode']
+
+        coa = request.form['coa']
+        dcoa = request.form['dcoa']
+        fm = request.form['fm']
+        prayer = request.form['prayer']
+        grounds = request.form['grounds']
+        state = request.form['state']
+        district = request.form['district']
+
+        act = request.form['act']
+        acts = request.form['acts']
+
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM CasesFiled WHERE CourtName = %s AND Petitioner = %s', (hcname,petitioner,))
+        case = cursor.fetchone()
+
+        if case:
+            msg = 'Already filed!'
+        elif not hcname or not matter or not petitioner or not respondant:
+            msg = 'Please fill out the form!'
+        else:
+            
+            cursor.execute('INSERT INTO CasesFiled (CourtName,MatterNature,MatterType,Urgency,Petitioner,PDOB,PGender,PPhone,PEmail,PState,PDistrict,PPincode,Respondant,RDOB,RAge,RGender,RPhone,REmail,RState,RDistrict,RPincode,COA,DateOfCOA,FactualMatrix,Prayer,Grounds,DState,DDistrict,Act,ActSection) VALUES (%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s)', (hcname,matter,mattert,urgency,petitioner,pdob,pgender,pphone,pemail,pstate,pdistrict,ppincode,respondant,rdob,rage,rgender,rphone,remail,rstate,rdistrict,rpincode,coa,dcoa,fm,prayer,grounds,state,district,act,acts,))
+            mysql.connection.commit()
+            msg = 'Filed!'
+    
+    elif request.method == 'POST':
+        msg = 'Please fill out the form!'
+    
+    return render_template('./citizen/file-case.html',uname=session['name'],msg=msg)
+
 
 ### Citizen Routes End ###
 
