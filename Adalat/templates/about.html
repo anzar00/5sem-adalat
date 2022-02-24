@@ -12,14 +12,20 @@
             <div class="product-item-title d-flex">
                 <div class="bg-faded p-5 d-flex ms-auto rounded">
                     <h2 class="section-heading mb-0">
-                        <span class="section-heading-upper">Blended to Perfection</span>
-                        <span class="section-heading-lower">Coffees & Teas</span>
+                        <span class="section-heading-upper">The insipiration to develop this idea</span>
+                        <span class="section-heading-lower">Introduction</span>
                     </h2>
                 </div>
             </div>
-            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="assets/img/products-01.jpg" alt="..." />
+            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/a1.jpg')}}" alt="..." />
             <div class="product-item-description d-flex me-auto">
-                <div class="bg-faded p-5 rounded"><p class="mb-0">We take pride in our work, and it shows. Every time you order a beverage from us, we guarantee that it will be an experience worth having. Whether it's our world famous Venezuelan Cappuccino, a refreshing iced herbal tea, or something as simple as a cup of speciality sourced black coffee, you will be coming back for more.</p></div>
+                <div class="bg-faded p-5 rounded"><p class="mb-0">Justice will not be served until those who are unaffected are as outraged as those who are.</p>~ Benjamin Franklin</div>
+            </div>
+            <div class="product-item-description d-flex me-auto">
+                <div class="bg-faded p-5 rounded">
+                <p>Access to justice has become an important issue in many justice systems around the world. 
+                    Increasingly, technology is seen as a potential facilitator of access to justice, particularly in terms of improving justice sector efficiency. </p>
+                </div>
             </div>
         </div>
     </div>
@@ -30,14 +36,14 @@
             <div class="product-item-title d-flex">
                 <div class="bg-faded p-5 d-flex me-auto rounded">
                     <h2 class="section-heading mb-0">
-                        <span class="section-heading-upper">Delicious Treats, Good Eats</span>
-                        <span class="section-heading-lower">Bakery & Kitchen</span>
+                        <span class="section-heading-upper">Problem</span>
+                        <span class="section-heading-lower">Existing System</span>
                     </h2>
                 </div>
             </div>
-            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="assets/img/products-02.jpg" alt="..." />
+            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/a2.jpg')}}" alt="..." />
             <div class="product-item-description d-flex ms-auto">
-                <div class="bg-faded p-5 rounded"><p class="mb-0">Our seasonal menu features delicious snacks, baked goods, and even full meals perfect for breakfast or lunchtime. We source our ingredients from local, oragnic farms whenever possible, alongside premium vendors for specialty goods.</p></div>
+                <div class="bg-faded p-5 rounded"><p class="mb-0">HCs have 5.1 million, lower courts have 34 million cases pending: Law Ministry.</p></div>
             </div>
         </div>
     </div>
@@ -48,14 +54,77 @@
             <div class="product-item-title d-flex">
                 <div class="bg-faded p-5 d-flex ms-auto rounded">
                     <h2 class="section-heading mb-0">
-                        <span class="section-heading-upper">From Around the World</span>
-                        <span class="section-heading-lower">Bulk Speciality Blends</span>
+                        <span class="section-heading-upper">Reason</span>
+                        <span class="section-heading-lower">Paperwork</span>
                     </h2>
                 </div>
             </div>
-            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="assets/img/products-03.jpg" alt="..." />
+            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/a3.jpg')}}" alt="..." />
             <div class="product-item-description d-flex me-auto">
-                <div class="bg-faded p-5 rounded"><p class="mb-0">Travelling the world for the very best quality coffee is something take pride in. When you visit us, you'll always find new blends from around the world, mainly from regions in Central and South America. We sell our blends in smaller to large bulk quantities. Please visit us in person for more details.</p></div>
+                <div class="bg-faded p-5 rounded"><p class="mb-0">Every year, over 60,000 cases are presented before the Supreme Court of India. Each document in each case has to be filed in a specific format. For example, each document can only be typed in a 13-14 font size. They must also have a 3cm margin, be double-spaced and should be printed on ONE side of the paper.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section">
+    <div class="container">
+        <div class="product-item">
+            <div class="product-item-title d-flex">
+                <div class="bg-faded p-5 d-flex me-auto rounded">
+                    <h2 class="section-heading mb-0">
+                        <span class="section-heading-lower">Proposed System</span>
+                    </h2>
+                </div>
+            </div>
+            <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/a4.jpg')}}" alt="..." />
+            <div class="product-item-description d-flex ms-auto">
+                <div class="bg-faded p-5 rounded">
+                    <p class="mb-0">
+                        - Incorporating Technology
+                        <br>
+                        To maintain digital record of cases to reduce offline work and hassle of judges to deal with paper works.
+                    </p>
+                    <p class="mb-0">
+                        - E-Courts
+                        <br>
+                        To present evidences like digital presence of person to record statement in case of inability of making physical presence to fast track proceedings.
+                    </p>
+                    <p class="mb-0">
+                        - Increasing Accountability
+                        <br>
+                        Making court proceeding live or presenting recorded sessions online to make public aware of inside happenings of court rooms and making proceedings more accountable.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section about-heading">
+    <div class="container">
+        <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/a5.jpg')}}" alt="..." />
+        <div class="about-heading-content">
+            <div class="row">
+                <div class="col-xl-9 col-lg-10 mx-auto">
+                    <div class="bg-faded rounded p-5">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Tools Used</span>
+                            <span class="section-heading-lower">Tech Stack</span>
+                        </h2>
+                        <p>
+                            <ul>
+                                <li>Programming  Language - Python</li>
+                                <li>Frameworks
+                                    <ul>
+                                        <li>Flask - Backend</li>
+                                        <li>Bootstrap - Frontend</li>
+                                    </ul>
+                                </li>
+                                <li>Database - MySQL</li>
+                            </ul>
+                            
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
